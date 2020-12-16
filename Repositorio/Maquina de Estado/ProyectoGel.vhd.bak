@@ -1,0 +1,64 @@
+--------------------------------------------------------------------------------
+-- Universidad Nacional de Colombia
+-- Departamento de Ingeniería Eléctrica y Electrónica
+-- Electrónica Digital I 2020-2
+-- Integrantes:-Diego Fernando Gutierrez García
+              --Cristian Eduardo
+--
+-- Target Devices: FPGA EPACEE10BLA
+---------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+---- Uncomment the following library declaration if instantiating
+---- any Xilinx primitives in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+entity ProyectoGel is
+Port ( X : in STD_LOGIC;
+Y : in STD_LOGIC;
+Rst : in STD_LOGIC;
+Clk : in STD_LOGIC;
+Sal : out STD_LOGIC );
+end ProyectoGel;
+architecture Maquina of ProyectoGel is
+type ESTADOS is (Vacio,STemperatura, Carnet, CarnetYSTemperatura, SManos, Salida);
+attribute syn_encoding: string;
+attribute syn_encoding of ESTADOS: type is "sequential";
+signal EstadoX,EstadoSig: ESTADOS;
+begin
+process (Rst,Clk) --Inicia el proceso secuencial
+begin
+if (Rst='1') then
+EstadoX <= Vacio;
+elsif (CLK'event and CLK='1') then
+EstadoX <= EstadoSig;
+end if;
+end process;
+process (EstadoX,X,Y)
+begin
+EstadoSig <= EstadoX;
+case EstadoX is
+when Vacio => if X='0' and Y='1' then EstadoSig<=STemperatura;
+elsif X='1' and Y='0' then EstadoSig<=Carnet;
+elsif X='1' and Y='1' then EstadoSig<=SManos;
+end if;
+when STemperatura => if X='0' and Y='1' then EstadoSig<=Carnet;
+elsif X='1' and Y='0' then EstadoSig<=CarnetYSTemperatura;
+elsif X='1' and Y='1' then EstadoSig<=Salida;
+end if;
+when Carnet => if X='0' and Y='1' then EstadoSig<=CarnetYSTemperatura;
+elsif X='1' and Y='0' then EstadoSig<=SManos;
+elsif X='1' and Y='1' then EstadoSig<=Salida;
+end if;
+when CarnetYSTemperatura => if X='0' and Y='1' then EstadoSig<=SManos;
+elsif X='1' then EstadoSig<=Salida;
+end if;
+when SManos => if X='1' or Y='1' then EstadoSig<=Salida;
+end if;
+when Salida => EstadoSig<=Vacio;
+end case;
+end process;
+Sal <= '1' when (EstadoX = Salida) else '0';
+end Maquina;

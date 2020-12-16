@@ -1,0 +1,9 @@
+
+State Machine - |ProyectoGel|EstadoX
+Name EstadoX.state_bit_2 EstadoX.state_bit_1 EstadoX.state_bit_0 
+EstadoX.Vacio 0 0 0 
+EstadoX.STemperatura 0 0 1 
+EstadoX.Carnet 0 1 0 
+EstadoX.CarnetYSTemperatura 0 1 1 
+EstadoX.SManos 1 0 0 
+EstadoX.Salida 1 0 1 

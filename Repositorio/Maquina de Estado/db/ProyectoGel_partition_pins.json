@@ -1,0 +1,37 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "Salida1",
+					"strict" : false
+				},
+				{
+					"name" : "clk_out1",
+					"strict" : false
+				},
+				{
+					"name" : "Clk",
+					"strict" : false
+				},
+				{
+					"name" : "Rst",
+					"strict" : false
+				},
+				{
+					"name" : "ESManos",
+					"strict" : false
+				},
+				{
+					"name" : "ECarnet",
+					"strict" : false
+				},
+				{
+					"name" : "ESTemperatura",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
