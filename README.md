@@ -3,4 +3,4 @@ Este proyecto consiste en el desarrollo de un dispensador de gel antibacterial d
 
 El link del video es [este](https://drive.google.com/file/d/1d00PuOKzfCsENaVddhdCiA8rrzHlb7Jx/view?usp=sharing)
 
-El 
+El pdf del informe esta en la carpeta de Repositorio, al igual que los codigos utilizados para la LCD, la bomba de aire y .
